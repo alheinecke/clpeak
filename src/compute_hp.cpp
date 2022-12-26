@@ -6,6 +6,7 @@ int clPeak::runComputeHP(cl::CommandQueue &queue, cl::Program &prog, device_info
   cl_uint workPerWI;
   cl::NDRange globalSize, localSize;
   cl_float A = 1.3f;
+  cl_float B = 1.3f;
   uint iters = devInfo.computeIters;
 
   if (!isComputeHP)
@@ -35,19 +36,19 @@ int clPeak::runComputeHP(cl::CommandQueue &queue, cl::Program &prog, device_info
     localSize = devInfo.maxWGSize;
 
     cl::Kernel kernel_v1(prog, "compute_hp_v1");
-    kernel_v1.setArg(0, outputBuf), kernel_v1.setArg(1, A);
+    kernel_v1.setArg(0, outputBuf), kernel_v1.setArg(1, A), kernel_v1.setArg(2, B);
 
     cl::Kernel kernel_v2(prog, "compute_hp_v2");
-    kernel_v2.setArg(0, outputBuf), kernel_v2.setArg(1, A);
+    kernel_v2.setArg(0, outputBuf), kernel_v2.setArg(1, A), kernel_v2.setArg(2, B);
 
     cl::Kernel kernel_v4(prog, "compute_hp_v4");
-    kernel_v4.setArg(0, outputBuf), kernel_v4.setArg(1, A);
+    kernel_v4.setArg(0, outputBuf), kernel_v4.setArg(1, A), kernel_v4.setArg(2, B);
 
     cl::Kernel kernel_v8(prog, "compute_hp_v8");
-    kernel_v8.setArg(0, outputBuf), kernel_v8.setArg(1, A);
+    kernel_v8.setArg(0, outputBuf), kernel_v8.setArg(1, A), kernel_v8.setArg(2, B);
 
     cl::Kernel kernel_v16(prog, "compute_hp_v16");
-    kernel_v16.setArg(0, outputBuf), kernel_v16.setArg(1, A);
+    kernel_v16.setArg(0, outputBuf), kernel_v16.setArg(1, A), kernel_v16.setArg(2, B);
 
     ///////////////////////////////////////////////////////////////////////////
     // Vector width 1
